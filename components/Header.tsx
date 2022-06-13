@@ -1,6 +1,23 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import {BellIcon, SearchIcon} from '@heroicons/react/outline';
+import Link from 'next/link';
 function Header() {
+    const [isScrolled, setIsScrolled] = useState(false); 
+
+    useEffect(() => {
+        const handleScroll = () => {
+            window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false);
+        }
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        }
+    
+    }, [])
+    
+
     return (
         <header>
             <div className='flex items-center space-x-2'>
@@ -17,6 +34,18 @@ function Header() {
                     <li>신작 & 인기</li>
                     <li>즐겨찾기</li>
                 </ul>
+            </div>
+            <div className='flex items-center space-x-4 text-sm font-light'>
+                <SearchIcon className='hidden w-6 h-6 sm:inline' />
+                <p className='hidden lg:inline'>키즈</p>
+                <BellIcon className='w-6 h-6'/>
+                <Link href="/account">
+                    <img
+                        src="https://rb.gy/g1pwyx"
+                        
+                        className="rounded cursor-pointer"
+                        />
+                </Link> 
             </div>
            
         </header>
