@@ -10,7 +10,7 @@ function Header() {
                     height={100}
                     className="object-contain cursor-pointer"
                 />
-                <ul>
+                <ul className='hidden space-x-4 md:flex'>
                     <li>홈으로</li>
                     <li>드라마</li>
                     <li>영화</li>
