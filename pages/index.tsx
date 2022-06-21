@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
+import Row from '../components/Row';
 import { Movie } from '../typing';
 import requests from '../utils/request';
 
@@ -33,14 +34,19 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      <main>
+      <main className='relative pb-24 pl-4 lg:space-y-24 lg:pl-6'>
         <Banner netflixOriginals={ netflixOriginals}/>
-        <section>
-          {/**Row */}
-          {/**Row */}
-          {/**Row */}
-          {/**Row */}
-          {/**Row */}
+        <section className="md:space-y-24">
+          <Row title="인기순" movies={trendingNow} />
+          <Row title="시청순" movies={topRated} />
+          <Row title="액션스릴러" movies={actionMovies} />
+          {/* My List */}
+          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+
+          <Row title="코미디" movies={comedyMovies} />
+          <Row title="공포" movies={horrorMovies} />
+          <Row title="로맨스" movies={romanceMovies} />
+          <Row title="다큐" movies={documentaries} />
         </section>
       </main>
         {/**모달 */} 
