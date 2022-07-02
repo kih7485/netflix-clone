@@ -1,8 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { modalState } from '../atoms/modalAtom';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
 import Row from '../components/Row';
+import useAuth from '../hooks/useAuth';
 import { Movie } from '../typing';
 import requests from '../utils/request';
 
@@ -27,6 +31,11 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
+  const { loading } = useAuth();
+  // const [showModal, setShowModal] = useState(false);
+  const showModal = useRecoilValue(modalState);
+
+  if (loading) return null;
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
       <Head>
@@ -46,7 +55,7 @@ const Home = ({
           <Row title="코미디" movies={comedyMovies} />
           <Row title="공포" movies={horrorMovies} />
           <Row title="로맨스" movies={romanceMovies} />
-          <Row title="다큐" movies={documentaries} />
+          <Row title="드라마" movies={documentaries} />
         </section>
       </main>
         {/**모달 */} 
