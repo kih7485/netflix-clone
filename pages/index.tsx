@@ -6,6 +6,7 @@ import { modalState } from '../atoms/modalAtom';
 import Banner from '../components/Banner';
 import Header from '../components/Header';
 import Modal from '../components/Modal';
+import Plans from '../components/Plans';
 import Row from '../components/Row';
 import useAuth from '../hooks/useAuth';
 import { Movie } from '../typing';
@@ -33,19 +34,21 @@ const Home = ({
   trendingNow,
 }: Props) => {
   const { loading } = useAuth();
-  // const [showModal, setShowModal] = useState(false);
   const showModal = useRecoilValue(modalState);
+  const subscriptsion = false;
 
-  if (loading) return null;
+  if (loading || subscriptsion === null) return null;
+  if (!subscriptsion) return <Plans/>
+
   return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h-[140vh]">
       <Head>
         <title>넷플릭스 클론코딩</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header/>
+      <Header />
       <main className='relative pb-24 pl-4 lg:space-y-24 lg:pl-6'>
-        <Banner netflixOriginals={ netflixOriginals}/>
+        <Banner netflixOriginals={netflixOriginals} />
         <section className="md:space-y-24">
           <Row title="인기순" movies={trendingNow} />
           <Row title="시청순" movies={topRated} />
@@ -59,10 +62,10 @@ const Home = ({
           <Row title="드라마" movies={documentaries} />
         </section>
       </main>
-        {showModal && <Modal/>} 
+      {showModal && <Modal />}
     </div>
   );
-};
+}
 
 export default Home;
 
