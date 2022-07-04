@@ -50,9 +50,15 @@ function Plans() {
                     </li>
                 </ul>
                 <div>
-                    <div>
+                    <div className='flex items-center justify-end w-full'>
                         <div className='planBox'>
-
+                            기본 
+                        </div>
+                        <div className='planBox'>
+                            기본 
+                        </div>
+                        <div className='planBox'>
+                            기본 
                         </div>
                     </div>
                 </div>
