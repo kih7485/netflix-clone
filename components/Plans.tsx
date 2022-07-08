@@ -49,8 +49,8 @@ function Plans() {
                         your plan anytime.
                     </li>
                 </ul>
-                <div>
-                    <div className='flex items-center justify-end w-full'>
+                <div className='flex flex-col mt-4 space-y-4'>
+                    <div className='flex items-center self-end justify-end w-full md:w-3/5'>
                         <div className='planBox'>
                             기본 
                         </div>
@@ -61,6 +61,11 @@ function Plans() {
                             기본 
                         </div>
                     </div>
+
+                    {/* <Table/> */}
+                    <button> 
+                        구독
+                    </button>
                 </div>
             </main>
         </div>
