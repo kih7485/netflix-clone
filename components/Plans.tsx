@@ -1,10 +1,16 @@
 import { CheckIcon } from '@heroicons/react/outline'
+import { Product } from '@stripe/firestore-stripe-payments'
 import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 import useAuth from '../hooks/useAuth'
+import Table from './Table'
 
-function Plans() {
+interface Props{
+    products: Product[]
+}
+
+function Plans({products}:Props) {
     const { logout, user } = useAuth()
   
     return (
@@ -51,18 +57,14 @@ function Plans() {
                 </ul>
                 <div className='flex flex-col mt-4 space-y-4'>
                     <div className='flex items-center self-end justify-end w-full md:w-3/5'>
-                        <div className='planBox'>
-                            기본 
-                        </div>
-                        <div className='planBox'>
-                            기본 
-                        </div>
-                        <div className='planBox'>
-                            기본 
-                        </div>
+                        {products.map((product) => (
+                            <div key={product.id } className='planBox'>
+                                {product.name}
+                            </div>
+                        ))}
                     </div>
 
-                    {/* <Table/> */}
+                    <Table products={products}/>
                     <button> 
                         구독
                     </button>
