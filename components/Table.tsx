@@ -66,11 +66,9 @@ function Table({ products, selectedPlan }: Props) {
                   ? 'text-[#E50914]'
                   : 'text-[gray]'
               }`}
-              key={product.id}
+              key={product.id} 
             >
-              {product.metadata.portability === 'true' && (
                 <CheckIcon className="inline-block w-8 h-8" />
-              )}
             </td>
           ))}
         </tr>

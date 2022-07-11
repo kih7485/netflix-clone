@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import { loadCheckout } from '../lib/stripe'
+import Loader from './Loader'
 import Table from './Table'
 // import Loader from './Loader'
 
@@ -46,7 +47,7 @@ function Plans({ products }: Props) {
           className="text-lg font-medium hover:underline"
           onClick={logout}
         >
-          Sign Out
+          로그아웃
         </button>
       </header>
 
@@ -93,11 +94,10 @@ function Plans({ products }: Props) {
             onClick={subscribeToPlan}
           >
                       {isBillingLoading ? (
-                          <div/>
-            //   <Loader color="dark:fill-gray-300" />
+              <Loader color="dark:fill-gray-300" />
             ) : (
-              'Subscribe'
-            )}
+              '구독'
+            )} 
           </button>
         </div>
       </main>
