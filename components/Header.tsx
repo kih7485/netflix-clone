@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {BellIcon, SearchIcon} from '@heroicons/react/outline';
 import Link from 'next/link';
 import useAuth from '../hooks/useAuth';
+import BasicMenu from './BasicMenu';
 function Header() {
     const [isScrolled, setIsScrolled] = useState(false); 
     const { logout } = useAuth();
@@ -29,6 +30,8 @@ function Header() {
                     height={100}
                     className="object-contain cursor-pointer"
                 />
+
+                <BasicMenu/>
                 <ul className='hidden space-x-4 md:flex'>
                     <li>홈으로</li>
                     <li>드라마</li>

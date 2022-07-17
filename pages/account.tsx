@@ -3,26 +3,28 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
-import useAuth from '../hooks/useAuth' 
+import Membership from '../components/Membership'
+import useAuth from '../hooks/useAuth'
 import useSubscription from '../hooks/useSubscription'
+import payments, { goToBillingPortal } from '../lib/stripe'
 
-interface Props { 
+interface Props {
   products: Product[]
 }
 
 function Account({ products }: Props) {
-    console.log(products);
-    const { user, logout, loading } = useAuth();
-    const subscription = useSubscription(user);
-    const [isBillingLoading, setBillingLoading] = useState(false);
+  console.log(products)
+  const { user, logout, loading } = useAuth()
+  const subscription = useSubscription(user)
+  const [isBillingLoading, setBillingLoading] = useState(false)
 
-    if (loading) return null;
+  if (loading) return null
 
-    console.log(subscription);
-  return ( 
+  console.log(subscription)
+  return (
     <div className="">
       <Head>
-        <title>계정 설정 - 넷플릭스 클론코딩</title>
+        <title>계정설정 - 넷플릭스 클론코딩</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={`bg-[#141414]`}>
@@ -53,15 +55,23 @@ function Account({ products }: Props) {
           </div>
         </div>
 
+        <Membership /> 
 
         <div className="grid grid-cols-1 px-4 py-4 mt-6 border gap-x-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4 className="text-lg text-[gray]">Plan Details</h4>
-         
+          {/* Find the current plan */}
+          <div className="col-span-2 font-medium">
+            {
+              products.filter(
+                (product) => product.id === subscription?.product
+              )[0]?.name
+            }
+          </div>
           <p
             className="text-blue-500 cursor-pointer hover:underline md:text-right"
-            // onClick={goToBillingPortal}
+            onClick={goToBillingPortal}
           >
-            Change plan
+            플랜 변경
           </p>
         </div>
 
@@ -79,4 +89,19 @@ function Account({ products }: Props) {
   )
 }
 
-export default Account;
+export default Account
+
+export const getStaticProps: GetStaticProps = async () => {
+  const products = await getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  })
+    .then((res) => res)
+    .catch((error) => console.log(error.message))
+
+  return {
+    props: {
+      products,
+    },
+  }
+}
